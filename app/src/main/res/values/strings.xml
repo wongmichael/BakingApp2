@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Baking App</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="servings">Servings</string>
+    <string name="image">image</string>
+    <string name="step">Step</string>
+    <string name="data_not_found">data not found</string>
+
+</resources>
