@@ -41,6 +41,7 @@ public class RecipesApiManager implements Serializable {
         recipesApiService.getRecipes().enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                Logger.e(String.valueOf(response.body()));
                 recipesApiCallback.onResponse(response.body());
             }
 
