@@ -39,7 +39,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        Logger.d(viewType);
+        //Logger.d(viewType);
         if(viewType==0){
             return new IngredientViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recipe_ingredient_list_item,viewGroup,false));
         } else {
@@ -64,11 +64,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             StepViewHolder viewHolder = (StepViewHolder) holder;
             viewHolder.mTvStepOrder.setText(position+"-");
             List<Step> steps = mRecipe.getSteps();
-            viewHolder.mTvStepName.setText(steps.get(position).getShortDescription());
+            viewHolder.mTvStepName.setText(steps.get(position-1).getShortDescription());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mOnItemClickListener!=null) mOnItemClickListener.onItemClick(position);
+                    if(mOnItemClickListener!=null) mOnItemClickListener.onItemClick(position-1);
                 }
             });
         }
@@ -82,7 +82,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return mRecipe.getSteps().size();
+        return mRecipe.getSteps().size()+1;
     }
 
     public class IngredientViewHolder extends RecyclerView.ViewHolder {

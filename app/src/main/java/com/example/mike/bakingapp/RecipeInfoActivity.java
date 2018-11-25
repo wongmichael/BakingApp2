@@ -41,11 +41,11 @@ public class RecipeInfoActivity extends AppCompatActivity {
         setTitle(mRecipe.getName());
         if(mRecipeStepDetailContainer!=null){
             mTwoPane=true;
-            Logger.d(mTwoPane);
             if(savedInstanceState==null && !mRecipe.getSteps().isEmpty()){
                 showStep(0);
             }
         }
+        Logger.d(mTwoPane);
         mStepsRv.setAdapter(new RecipeAdapter(mRecipe, new RecipeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -57,8 +57,17 @@ public class RecipeInfoActivity extends AppCompatActivity {
     private void showStep(int position) {
         if(mTwoPane){
             Bundle bundle = new Bundle();
+            bundle.putParcelable(RecipeStepDetailFragment.STEP,mRecipe.getSteps().get(position));
+            RecipeStepDetailFragment f=new RecipeStepDetailFragment();
+            f.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.recipe_step_detail_container,f)
+                    .commit();
         } else{
-            Intent intent = new Intent();
+            Intent intent = new Intent(this,RecipeStepDetailActivity.class);
+            intent.putExtra(RecipeStepDetailActivity.RECIPE,mRecipe);
+            intent.putExtra(RecipeStepDetailActivity.STEP_SELECTED,position);
+            startActivity(intent);
         }
     }
 }
