@@ -4,7 +4,8 @@
     <string name="ingredients">Ingredients</string>
     <string name="servings">Servings</string>
     <string name="image">image</string>
-    <string name="step">Step</string>
+    <string name="steps">Steps</string>
     <string name="data_not_found">data not found</string>
+    <string name="no_recipe_data">recipe data not found</string>
 
 </resources>

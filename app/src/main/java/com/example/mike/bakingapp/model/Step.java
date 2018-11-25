@@ -55,7 +55,14 @@ public class Step implements Parcelable {
         videoURL = in.readString();
         thumbnailURL = in.readString();
     }
-
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.shortDescription);
+        dest.writeString(this.description);
+        dest.writeString(this.videoURL);
+        dest.writeString(this.thumbnailURL);
+    }
     public static final Creator<Step> CREATOR = new Creator<Step>() {
         @Override
         public Step createFromParcel(Parcel in) {
@@ -113,12 +120,5 @@ public class Step implements Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.videoURL);
-        dest.writeString(this.description);
-        dest.writeInt(this.id);
-        dest.writeString(this.shortDescription);
-        dest.writeString(this.thumbnailURL);
-    }
+
 }
