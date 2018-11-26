@@ -3,6 +3,7 @@ package com.example.mike.bakingapp;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.assertion.ViewAssertions;
@@ -25,9 +26,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDis
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.mike.bakingapp.model.Recipe;
+import com.orhanobut.logger.Logger;
 
 @RunWith(AndroidJUnit4.class)
 public class Tests {
@@ -68,7 +71,12 @@ public class Tests {
     @Test
     public void clickOnRecyclerViewStepItem_opensRecipeStepActivity_orFragment(){
         getMeToRecipeInfo(0);
-        if(onView(withId(R.id.recipe_step_detail_container)).equals(null)){
+/*        View v = mainActivityActivityTestRule.getActivity().findViewById(R.id.recipe_step_detail_container);
+        Logger.d(v);*/
+        boolean twoPane = globalApplication.getResources().getBoolean(R.bool.twoPane);
+        Logger.d(twoPane);
+        if(!twoPane){
+        //if(onView(withId(R.id.recipe_step_detail_container)).equals(null)){
             //singlePane
             Intents.init();
             selectRecipeStep(1);
@@ -104,7 +112,7 @@ public class Tests {
 
     @Ignore
     public static void getMeToRecipeInfo(int recipePosition){
-        onView(withId(R.id.rv_recipe_list)).check(ViewAssertions.matches(isDisplayed()));
+        //onView(withId(R.id.rv_recipe_list)).check(ViewAssertions.matches(isDisplayed()));
         onView(withId(R.id.rv_recipe_list))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(recipePosition,click()));
     }
