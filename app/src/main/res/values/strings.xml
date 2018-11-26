@@ -8,5 +8,7 @@
     <string name="data_not_found">data not found</string>
     <string name="no_recipe_data">recipe data not found</string>
     <string name="no_step_data">step data not found</string>
+    <string name="add_to_widget">add to widget</string>
+    <string name="widget_recipe_key">widget recipe key</string>
 
 </resources>

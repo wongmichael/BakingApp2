@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.mike.bakingapp.adapter.RecipeAdapter;
 import com.example.mike.bakingapp.model.Recipe;
+import com.example.mike.bakingapp.widget.AppWidgetService;
 import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
@@ -69,5 +73,24 @@ public class RecipeInfoActivity extends AppCompatActivity {
             intent.putExtra(RecipeStepDetailActivity.STEP_SELECTED,position);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.recipe_info,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Logger.d("itemId"+item.getItemId());
+        if(item.getItemId()==R.id.action_add_to_widget){
+            AppWidgetService.updateWidget(this,mRecipe);
+            Toast.makeText(this,String.format("%s added to widget",mRecipe.getName()),Toast.LENGTH_LONG);
+            return true;
+        } else
+        return super.onOptionsItemSelected(item);
     }
 }
